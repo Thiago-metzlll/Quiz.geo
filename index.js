@@ -23,7 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
       pergunta: "Qual país faz fronteira com o Brasil ao sul?",
       respostas: ["Peru", "Colômbia", "Uruguai", "Venezuela"],
       correta: 2
-    }
+    },
+     {
+      pergunta: "Qual é a capital de Curitiba?",
+      respostas: ["Paraná", "São Paulo", "Rússia Br", "Todas as acima"],
+      correta: null
+    },
   ];
 
   const main = document.querySelector("main");

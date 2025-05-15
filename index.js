@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const proximaBtn = document.createElement("button");
   proximaBtn.textContent = "Próxima pergunta";
-  proximaBtn.style.display = "none";
+  ///proximaBtn.style.display = "none";
+  proximaBtn.className = 'btn_pass';
 
   const pontuacaoFinalEl = document.createElement("p");
 

@@ -1,5 +1,5 @@
-@import url(quiz_block.css);
-@import url(animated.globe.css);
+@import url(/viwer/quiz_block.css);
+@import url(/viwer/animated.globe.css);
 
 body {
     width: 100vw;
@@ -17,7 +17,7 @@ header {
 main {
     width: 100%;
     height: 76%;
-    background-image: url(./assets/image.main.quiz.png);
+    background-image: url(/assets/image.main.quiz.png);
     background-repeat: repeat;
     background-size: 200px;
 

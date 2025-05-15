@@ -1,60 +1,108 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-// Dados do quiz
-const quiz = {
-  pergunta: "Qual é a capital do Uruguai?",
-  opcoes: ["Montevidéu", "Assunção", "Buenos Aires", "Santiago"],
-  resposta: "Montevidéu"
-};
 
-// Criando elementos
-const main = document.querySelector("main");
+  let perguntaAtual = 0;
+  let pontuacao = 0;
 
-const quiz_block = document.createElement("div");
-quiz_block.id = "quiz_block ";
-quiz_block.className = 'column_start';
+  const quiz = [
+    {
+      pergunta: "Qual é a capital do Uruguai?",
+      respostas: ["Montevidéu", "Assunção", "Buenos Aires", "Santiago"],
+      correta: 0
+    },
+    {
+      pergunta: "Qual é a capital do Brasil?",
+      respostas: ["São Paulo", "Brasília", "Rio de Janeiro", "Salvador"],
+      correta: 1
+    },
+    {
+      pergunta: "Qual é o rio mais extenso do mundo?",
+      respostas: ["Amazonas", "Nilo", "Yangtzé", "Mississippi"],
+      correta: 0
+    },
+    {
+      pergunta: "Qual país faz fronteira com o Brasil ao sul?",
+      respostas: ["Peru", "Colômbia", "Uruguai", "Venezuela"],
+      correta: 2
+    }
+  ];
 
-// Pergunta
-const perguntaEl = document.createElement("p");
-perguntaEl.textContent = quiz.pergunta;
-perguntaEl.className = 'pergunta';
+  const main = document.querySelector("main");
 
-quiz_block.appendChild(perguntaEl);
+  const quiz_block = document.createElement("div");
+  quiz_block.id = "quiz_block";
+  quiz_block.className = 'column_start';
+  main.appendChild(quiz_block);
 
-// Resultado (criado, mas vazio no início)
-const resultadoEl = document.createElement("p");
-resultadoEl.id = "resultado";
+  const perguntaEl = document.createElement("p");
+  perguntaEl.className = 'pergunta';
 
-// Cria uma div para os botões
-const opcoesEl = document.createElement("div");
-opcoesEl.id = "opcoes-container";
+  const opcoesEl = document.createElement("div");
+  opcoesEl.id = "opcoes-container";
 
+  const resultadoEl = document.createElement("p");
+  resultadoEl.id = "resultado";
 
-// Criar botões de alternativas
-quiz.opcoes.forEach(opcao => {
-  const botao = document.createElement("button");
-  botao.textContent = opcao;
-  botao.className = 'btns'
-  
-  botao.onclick = () => {
-    if (opcao === quiz.resposta) {
-      resultadoEl.textContent = "✅ Resposta correta!";
-      resultadoEl.style.color = "green";
+  const proximaBtn = document.createElement("button");
+  proximaBtn.textContent = "Próxima pergunta";
+  proximaBtn.style.display = "none";
+
+  const pontuacaoFinalEl = document.createElement("p");
+
+  quiz_block.appendChild(perguntaEl);
+  quiz_block.appendChild(opcoesEl);
+  quiz_block.appendChild(resultadoEl);
+  quiz_block.appendChild(proximaBtn);
+  quiz_block.appendChild(pontuacaoFinalEl);
+
+  function mostrarPergunta() {
+    const perguntaAtualObj = quiz[perguntaAtual];
+
+    perguntaEl.textContent = perguntaAtualObj.pergunta;
+    opcoesEl.innerHTML = "";
+    resultadoEl.textContent = "";
+    proximaBtn.style.display = "none";
+
+    perguntaAtualObj.respostas.forEach((resposta, index) => {
+      const botao = document.createElement("button");
+      botao.textContent = resposta;
+      botao.className = 'btns';
+
+      botao.onclick = () => {
+        if (index === perguntaAtualObj.correta) {
+          resultadoEl.textContent = "✅ Resposta correta!";
+          resultadoEl.style.color = "green";
+          pontuacao++;
+        } else {
+          resultadoEl.textContent = "❌ Resposta errada.";
+          resultadoEl.style.color = "red";
+        }
+
+        // Impede múltiplos cliques:
+        Array.from(opcoesEl.children).forEach(btn => btn.disabled = true);
+
+        proximaBtn.style.display = "block";
+      };
+
+      opcoesEl.appendChild(botao);
+    });
+  }
+
+  proximaBtn.onclick = () => {
+    perguntaAtual++;
+
+    if (perguntaAtual < quiz.length) {
+      mostrarPergunta();
     } else {
-      resultadoEl.textContent = "❌ Resposta errada.";
-      resultadoEl.style.color = "red";
+      mostrarPontuacaoFinal();
     }
   };
-  opcoesEl.appendChild(botao);
+
+  function mostrarPontuacaoFinal() {
+    quiz_block.innerHTML = "";
+    const finalText = document.createElement("p");
+    finalText.textContent = `Você acertou ${pontuacao} de ${quiz.length} perguntas!`;
+    quiz_block.appendChild(finalText);
+  }
+
+  mostrarPergunta();
 });
-
-// Adiciona o resultado depois dos botões
-quiz_block.appendChild(resultadoEl);
-quiz_block.appendChild(perguntaEl);
-quiz_block.appendChild(opcoesEl);
-
-
-// Coloca tudo dentro do <main>
-main.appendChild(quiz_block);
-
-})

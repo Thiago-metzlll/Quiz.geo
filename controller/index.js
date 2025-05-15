@@ -1,5 +1,3 @@
-import {option } from "./quiz/option_btns.js"
-
 document.addEventListener('DOMContentLoaded', () => {
 
   let perguntaAtual = 0;
@@ -29,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
      {
       pergunta: "Qual é a capital de Curitiba?",
       respostas: ["Paraná", "São Paulo", "Rússia Br", "Todas as acima"],
-      correta: null
+      correta: 1
     },
   ];
 

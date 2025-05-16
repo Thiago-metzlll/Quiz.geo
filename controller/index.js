@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   proximaBtn.textContent = "Próxima pergunta";
   ///proximaBtn.style.display = "none";
   proximaBtn.className = 'btn_pass';
+  proximaBtn.style.marginTop = "20px";
 
   const pontuacaoFinalEl = document.createElement("p");
 
@@ -121,10 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (index === perguntaAtualObj.correta) {
           resultadoEl.textContent = "✅ Resposta correta!";
           resultadoEl.style.color = "green";
+          resultadoEl.style.fontSize = "35px"
+
           pontuacao++;
         } else {
           resultadoEl.textContent = "❌ Resposta errada.";
           resultadoEl.style.color = "red";
+           resultadoEl.style.fontSize = "35px"
+
         }
 
         // Impede múltiplos cliques:

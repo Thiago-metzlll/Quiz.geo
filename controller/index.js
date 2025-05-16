@@ -24,19 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
       respostas: ["Peru", "Colômbia", "Uruguai", "Venezuela"],
       correta: 2
     },
-     {
+    {
       pergunta: "Qual é a capital de Curitiba?",
       respostas: ["Paraná", "São Paulo", "Rússia Br", "Todas as acima", "sla mn"],
       correta: 4
     },
-    
-     {
+
+    {
       pergunta: "Quantas capitais possue a África do Sul?",
       respostas: ["uma", "nenhuma", "duas", "três"],
       correta: 3
     },
-    
-     {
+
+    {
       pergunta: "a União Européia é?",
       respostas: ["um país", "um estado", "um ente supranacional", "Mercosul"],
       correta: 2
@@ -69,13 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
       correta: 2
     },
     {
-    pergunta: "A língua mais próxima ao português é",
+      pergunta: "A língua mais próxima ao português é",
       respostas: ["Espanhol", "Galego", "Italiano", "português arcaico da Guiana brasileira"],
       correta: 1
     },
   ];
 
   const main = document.querySelector("main");
+
+
 
   const quiz_block = document.createElement("div");
   quiz_block.id = "quiz_block";
@@ -84,6 +86,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const perguntaEl = document.createElement("p");
   perguntaEl.className = 'pergunta';
+
+  const progressoContainer = document.createElement("div");
+  progressoContainer.id = "progresso-container";
+  progressoContainer.style.width = "70%";
+  progressoContainer.style.height = "10px";
+  progressoContainer.style.backgroundColor = "#ddd";
+  progressoContainer.style.margin = "10px 0";
+
+  const barraProgresso = document.createElement("div");
+  barraProgresso.id = "barra-progresso";
+  barraProgresso.style.height = "100%";
+  barraProgresso.style.width = "0%";
+  barraProgresso.style.backgroundColor = "#4caf50";
+  barraProgresso.style.transition = "width 0.3s";
+  progressoContainer.style.borderRadius = "20px"; // bordas arredondadas
+
+
+  progressoContainer.appendChild(barraProgresso);
+  quiz_block.appendChild(progressoContainer);
+
 
   const opcoesEl = document.createElement("div");
   opcoesEl.id = "opcoes-container";
@@ -100,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pontuacaoFinalEl = document.createElement("p");
 
   quiz_block.appendChild(perguntaEl);
+  quiz_block.appendChild(progressoContainer);
   quiz_block.appendChild(opcoesEl);
   quiz_block.appendChild(resultadoEl);
   quiz_block.appendChild(proximaBtn);
@@ -128,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           resultadoEl.textContent = "❌ Resposta errada.";
           resultadoEl.style.color = "red";
-           resultadoEl.style.fontSize = "35px"
+          resultadoEl.style.fontSize = "35px"
 
         }
 
@@ -139,6 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       opcoesEl.appendChild(botao);
+
+      let progresso = ((perguntaAtual) / quiz.length) * 100;
+      barraProgresso.style.width = progresso + "%";
+
     });
   }
 
@@ -157,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const finalText = document.createElement("p");
     finalText.textContent = `Você acertou ${pontuacao} de ${quiz.length} perguntas!`;
     quiz_block.appendChild(finalText);
+    barraProgresso.style.width = "100%";
   }
 
   mostrarPergunta();

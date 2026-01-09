@@ -1,1 +1,3 @@
 Quiz Geo é um jogo de perguntas de geografia, o primeiro projeto do curso, usando apenas JS puro. Ele não foi atualizado, pois fiz uma segunda versão em React, que adiciona novas funiconalidades e o torna responsivo.
+
+![Preview do Quiz Geo](./assets/image.png)

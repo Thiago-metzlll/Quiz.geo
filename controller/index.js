@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       correta: 2
     },
     {
-      pergunta: "Qual é a capital de Curitiba?",
+      pergunta: "Qual é a capital de Curitiba? (ironia)",
       respostas: ["Paraná", "São Paulo", "Rússia Br", "Todas as acima", "sla mn"],
       correta: 4
     },
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       correta: 2
     },
     {
-      pergunta: "Qual país possui formato similar ao Paraná?",
+      pergunta: "Qual país possui formato similar ao Paraná? (ironia)",
       respostas: ["Guiana Brasileira", "Romênia", "Chad", "Rússia"],
       correta: 1
     },
@@ -100,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
   barraProgresso.style.width = "0%";
   barraProgresso.style.backgroundColor = "#4caf50";
   barraProgresso.style.transition = "width 0.3s";
-  progressoContainer.style.borderRadius = "20px"; // bordas arredondadas
-
+  progressoContainer.style.borderRadius = "20px"; 
 
   progressoContainer.appendChild(barraProgresso);
   quiz_block.appendChild(progressoContainer);
@@ -115,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const proximaBtn = document.createElement("button");
   proximaBtn.textContent = "Próxima pergunta";
-  ///proximaBtn.style.display = "none";
   proximaBtn.className = 'btn_pass';
   proximaBtn.style.marginTop = "20px";
 
@@ -155,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
-        // Impede múltiplos cliques:
+        
         Array.from(opcoesEl.children).forEach(btn => btn.disabled = true);
 
         proximaBtn.style.display = "block";
